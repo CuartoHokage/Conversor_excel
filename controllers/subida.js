@@ -27,7 +27,7 @@ function verExcel(ruta){
         //console.log(editor.slice(2, -1))
         //console.log(element)
         lista.N_PLU=dataExcel[index].N_Plu
-        lista.Descripcion=dataExcel[index].Descripcion
+        lista.Descripcion=(dataExcel[index].Descripcion).replace(',', ' ')
         lista["Precio Etiqueta"]=precio
         lista.flag=dataExcel[index].Barra.substr(0,2)
         lista.plucode=dataExcel[index].Barra.slice(2)
