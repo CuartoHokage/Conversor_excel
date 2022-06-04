@@ -52,6 +52,42 @@ api.post('/upload_video',md_upload , (req, res) => {
    });
 
 })
+
+api.post('/apk_verificador',md_upload , (req, res) => {
+    let EDFile = req.files.picture.path
+    console.log(EDFile)
+   var target_path = './public/uploads/apks/' + 'verificador.apk';
+   fs.rename(EDFile, target_path, function(err) {
+      if (err) throw err;   
+    /*   
+    fs.writeFile('video.mp4', EDFile, (err) => {
+        if (err) throw err;
+        //console.log('File created');
+     });
+    */
+     res.status(200).render('index')
+     
+   });
+
+})
+
+api.post('/ingreso_factura',md_upload , (req, res) => {
+    let EDFile = req.files.picture.path
+    console.log(EDFile)
+   var target_path = './public/uploads/apks/' + 'ingreso_facturas.apk';
+   fs.rename(EDFile, target_path, function(err) {
+      if (err) throw err;   
+    /*   
+    fs.writeFile('video.mp4', EDFile, (err) => {
+        if (err) throw err;
+        //console.log('File created');
+     });
+    */
+     res.status(200).render('index')
+     
+   });
+
+})
 //vistas
 
 api.get('/descarga_apk_bodega', (req, res)=>{
@@ -64,13 +100,21 @@ api.get('/stream', (req, res)=>{
 api.get('/subir_video', (req, res)=>{
 	res.render('subidavideo')
 })
+api.get('/subir_apk', (req, res)=>{
+	res.render('subir_apks')
+})
+
 //descargas
 api.get('/descargar',(req, res)=>{
     res.download('Filename.csv');
 })
 
 api.get('/descargarapk',(req, res)=>{
-    res.download('InventarioCorales.apk');
+    res.download('./public/uploads/apks/ingreso_facturas.apk');
+})
+
+api.get('/descargarapk2',(req, res)=>{
+    res.download('./public/uploads/apks/verificador.apk');
 })
 
 api.get('/new',(req, res)=>{
