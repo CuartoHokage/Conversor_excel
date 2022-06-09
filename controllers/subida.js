@@ -27,7 +27,10 @@ function verExcel(ruta){
         //console.log(editor.slice(2, -1))
         //console.log(element)
         lista.N_PLU=dataExcel[index].N_Plu
+        //en caso de tener comas en la descripcion se eliminan para no dañar formato .CSV
         lista.Descripcion=(dataExcel[index].Descripcion).replace(',', ' ')
+        //limitacion de caracteres por confirmar
+        //lista.Descripcion=((dataExcel[index].Descripcion).replace(',', ' ')).substr(0,30)
         lista["Precio Etiqueta"]=precio
         lista.flag=dataExcel[index].Barra.substr(0,2)
         lista.plucode=dataExcel[index].Barra.slice(2)
