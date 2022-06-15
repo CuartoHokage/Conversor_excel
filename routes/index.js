@@ -1,5 +1,6 @@
 'use strict'
 var verExcel= require('../controllers/subida');
+var video= require('../controllers/videoController');
 const express= require('express');
 const api= express.Router();
 var multiparty = require('connect-multiparty');
@@ -37,8 +38,10 @@ api.post('/upload',md_upload , (req, res) => {
 //subida de videos
 api.post('/upload_video',md_upload , (req, res) => {
     let EDFile = req.files.picture.path
+    let id_video= req.body.seleccion;
+    let zona= req.body.zona;
     console.log(EDFile)
-   var target_path = './public/video/' + 'video.mp4';
+   var target_path = './public/videos/'+zona+'/' + ''+id_video+'.mp4';
    fs.rename(EDFile, target_path, function(err) {
       if (err) throw err;   
     /*   
@@ -47,7 +50,7 @@ api.post('/upload_video',md_upload , (req, res) => {
         //console.log('File created');
      });
     */
-     res.status(200).render('index')
+     res.status(200).render('subidavideo')
      
    });
 
@@ -94,9 +97,17 @@ api.get('/descarga_apk_bodega', (req, res)=>{
 	res.render('apk')
 })
 
-api.get('/stream', (req, res)=>{
-	res.render('video')
+api.get('/videos_coral', video.videos_coral, (req, res)=>{
+	res.render('video_coral', )
 })
+
+api.get('/videos', video.videos, (req, res)=>{
+	res.render('videos', )
+})
+
+
+
+
 api.get('/subir_video', (req, res)=>{
 	res.render('subidavideo')
 })

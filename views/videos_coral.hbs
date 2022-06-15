@@ -1,0 +1,27 @@
+{{!-- <h1>{{data}}</h1> --}}
+
+<video id="vid" preload="true" controls="false"  poster="/imagen/descarga.png" autoplay="true" muted="muted" volume="0" controls width="300" height="168">
+ <source src="/videos/Coral/1.mp4"  type="video/mp4">
+</video>
+
+<script >
+     // el array de los videos
+
+        let vids = "{{data}}"
+        //Dividir string de la data devuelta del get y guardar en array
+        let elementos_array= vids.split(',')
+        // la longitud del array de los videos
+        let leng = elementos_array.length;
+        
+        // un numero utilizado para saber que video se está reproduciendo
+        let n = 0;
+        console.log(elementos_array[n%leng])
+        // utilizo el evento "ended" para saber si el video se ha acabado
+        vid.addEventListener("ended",()=>{
+        // si el video se ha acabado cambia el atributo src
+        vid.setAttribute("src", '/videos/Coral/'+elementos_array[n%leng]);
+
+        n++;
+        }
+        )
+</script>
