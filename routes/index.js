@@ -128,6 +128,10 @@ api.get('/descargarapk2',(req, res)=>{
     res.download('./public/uploads/apks/verificador.apk');
 })
 
+api.get('/descarga_video',(req, res)=>{
+    res.download('./public/videos/Coral/1.mp4');
+})
+
 api.get('/new',(req, res)=>{
     res.redirect('index');
 })

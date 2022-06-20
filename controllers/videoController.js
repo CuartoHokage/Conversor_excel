@@ -17,7 +17,7 @@ function videos(req, res){
 }
 function videos_coral(req, res){
   fs.readdir('./public/videos/Coral', function (err, archivos) {
-    console.log(err)
+    console.log('Error existente:'+err)
       if (err) {
       onError(err);
       return;
