@@ -31,6 +31,7 @@ function verExcel(ruta){
         //lista.Descripcion=(dataExcel[index].Descripcion).replace(',', ' ')
         //limitacion de caracteres por confirmar
         lista.Descripcion=((dataExcel[index].Descripcion).replace(',', ' ')).substr(0,27)
+        lista.Descripcion=((dataExcel[index].Descripcion).replace('"', ' ')).substr(0,27)
         lista["Precio Etiqueta"]=precio
         lista.flag=dataExcel[index].Barra.substr(0,2)
         lista.plucode=dataExcel[index].Barra.slice(2)
@@ -52,7 +53,6 @@ function verExcel(ruta){
         'Barra:' + dataExcel[itemFila].Barra +'\n';
     }
     */
-   
    return arrayCSV;
 }
 
