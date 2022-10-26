@@ -13,27 +13,39 @@ api.post('/upload',md_upload , (req, res) => {
     let EDFile = req.files.picture.path
     console.log(EDFile)
    var target_path = './public/uploads/productos/' + req.files.picture.name;
-   fs.rename(EDFile, target_path, function(err) {
-      if (err) throw err;
-      
-         //if (err) throw err;
-         //console.log(EDFile)
-    //var target_path = './public/uploads/productos/' + req.files.picture+ '.xls';
-    var json_excel=verExcel.verExcel(target_path)
-    //console.log(parsear_datos)
-    var convertToCSV=verExcel.convertToCSV
-    //console.log(convertToCSV(parsear_datos))
-    //res.download('sss.csv',convertToCSV(parsear_datos));
-    
-    fs.writeFile('Filename.csv', convertToCSV(json_excel), (err) => {
+   //Separa nombre y extension del archivo subido en un array 
+   var nombre_archivo=req.files.picture.name.split('\.')
+   var file_ext= nombre_archivo[1]
+   //si no es XLS no dejara subir archivo
+   if(file_ext== 'xls' ){
+    fs.rename(EDFile, target_path, function(err) {
         if (err) throw err;
-        //console.log('File created');
-     });
-
-     res.status(200).render('index')
-     
-   });
-
+        
+           //if (err) throw err;
+           //console.log(EDFile)
+      //var target_path = './public/uploads/productos/' + req.files.picture+ '.xls';
+      var json_excel=verExcel.verExcel(target_path)
+      //console.log(parsear_datos)
+      var convertToCSV=verExcel.convertToCSV
+      //console.log(convertToCSV(parsear_datos))
+      //res.download('sss.csv',convertToCSV(parsear_datos));
+      
+      fs.writeFile('Filename.csv', convertToCSV(json_excel), (err) => {
+          if (err) throw err;
+          //console.log('File created');
+       });
+  
+       res.status(200).render('index')
+       
+     });  
+   }else{
+    return res.status(200).send({
+        status: 'error',
+        message: 'Extension de archivo invalida',
+        file:target_path
+    });
+   }
+  
 })
 //subida de videos
 api.post('/upload_video',md_upload , (req, res) => {
