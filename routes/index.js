@@ -85,6 +85,40 @@ api.post('/apk_verificador',md_upload , (req, res) => {
    });
 
 })
+api.post('/apk_gerencia',md_upload , (req, res) => {
+    let EDFile = req.files.picture.path
+    console.log(EDFile)
+   var target_path = './public/uploads/apks/' + 'apk_gerencia.apk';
+   fs.rename(EDFile, target_path, function(err) {
+      if (err) throw err;   
+    /*   
+    fs.writeFile('video.mp4', EDFile, (err) => {
+        if (err) throw err;
+        //console.log('File created');
+     });
+    */
+     res.status(200).render('index')
+     
+   });
+
+})
+api.post('/rompefilas',md_upload , (req, res) => {
+    let EDFile = req.files.picture.path
+    console.log(EDFile)
+   var target_path = './public/uploads/apks/' + 'rompefilas.apk';
+   fs.rename(EDFile, target_path, function(err) {
+      if (err) throw err;   
+    /*   
+    fs.writeFile('video.mp4', EDFile, (err) => {
+        if (err) throw err;
+        //console.log('File created');
+     });
+    */
+     res.status(200).render('index')
+     
+   });
+
+})
 
 api.post('/ingreso_factura',md_upload , (req, res) => {
     let EDFile = req.files.picture.path
@@ -138,6 +172,14 @@ api.get('/descargarapk',(req, res)=>{
 
 api.get('/descargarapk2',(req, res)=>{
     res.download('./public/uploads/apks/verificador.apk');
+})
+
+api.get('/descargarapk3',(req, res)=>{
+    res.download('./public/uploads/apks/apk_gerencia.apk');
+})
+
+api.get('/descargarapk4',(req, res)=>{
+    res.download('./public/uploads/apks/rompefilas.apk');
 })
 
 api.get('/descarga_video',(req, res)=>{
